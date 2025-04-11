@@ -47,13 +47,29 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">MIPSsimulator</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#MIPSsimulator.MAX_INSTRUCTIONS"><code class="docutils literal notranslate"><span class="pre">MAX_INSTRUCTIONS</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.add"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.addi"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.addi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.and_op"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.and_op()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.beq"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.beq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.bne"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.bne()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.get_register_value"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.get_register_value()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.instruction_count"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.instruction_count</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.instruction_pointer"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.instruction_pointer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.instructions"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.instructions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.jump"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.jump()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.load_instructions"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.load_instructions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.lw"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.lw()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.memory"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.memory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.nor_op"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.nor_op()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.or_op"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.or_op()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.parse_memory_address"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.parse_memory_address()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.registers"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.registers</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.run"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.set_register_value"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.set_register_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.sll"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.sll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.slt"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.slt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.sub"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.sub()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#MIPSsimulator.MIPS_Emulator.sw"><code class="docutils literal notranslate"><span class="pre">MIPS_Emulator.sw()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#MIPSsimulator.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
@@ -94,7 +110,7 @@ de registros y memoria.</p>
 <p>Este código fue generado con el uso de Gemini 2.0 Flash</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="MIPSsimulator.MAX_INSTRUCTIONS">
-<span class="sig-prename descclassname"><span class="pre">MIPSsimulator.</span></span><span class="sig-name descname"><span class="pre">MAX_INSTRUCTIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#MIPSsimulator.MAX_INSTRUCTIONS" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MIPSsimulator.</span></span><span class="sig-name descname"><span class="pre">MAX_INSTRUCTIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">40</span></em><a class="headerlink" href="#MIPSsimulator.MAX_INSTRUCTIONS" title="Link to this definition"></a></dt>
 <dd><p>Máximo número de instrucciones a ejecutar para evitar bucles infinitos.</p>
 </dd></dl>
 
@@ -104,6 +120,109 @@ de registros y memoria.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Clase para emular la ejecución de código ensamblador MIPS.</p>
 <p>Soporta un conjunto limitado de instrucciones y registros.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.add" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “add”.</p>
+<p>Suma el valor de dos registros y guarda el resultado en otro registro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src1</strong> (<em>str</em>) – El primer registro fuente.</p></li>
+<li><p><strong>src2</strong> (<em>str</em>) – El segundo registro fuente.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.addi">
+<span class="sig-name descname"><span class="pre">addi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">immediate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.addi" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “addi” (add immediate).</p>
+<p>Suma un valor inmediato a un registro y guarda el resultado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src</strong> (<em>str</em>) – El registro fuente.</p></li>
+<li><p><strong>immediate</strong> (<em>str</em>) – El valor inmediato a sumar.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.and_op">
+<span class="sig-name descname"><span class="pre">and_op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.and_op" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “and”.</p>
+<p>Realiza una operación AND bit a bit entre dos registros y
+guarda el resultado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src1</strong> (<em>str</em>) – El primer registro fuente.</p></li>
+<li><p><strong>src2</strong> (<em>str</em>) – El segundo registro fuente.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.beq">
+<span class="sig-name descname"><span class="pre">beq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.beq" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “beq” (branch if equal).</p>
+<p>Si el valor de dos registros son iguales, salta a una
+dirección calculada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rs</strong> (<em>str</em>) – El primer registro a comparar.</p></li>
+<li><p><strong>rt</strong> (<em>str</em>) – El segundo registro a comparar.</p></li>
+<li><p><strong>offset</strong> (<em>str</em>) – El desplazamiento (en words).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.bne">
+<span class="sig-name descname"><span class="pre">bne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.bne" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “bne” (branch if not equal).</p>
+<p>Si el valor de dos registros no son iguales, salta a
+una dirección calculada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rs</strong> (<em>str</em>) – El primer registro a comparar.</p></li>
+<li><p><strong>rt</strong> (<em>str</em>) – El segundo registro a comparar.</p></li>
+<li><p><strong>offset</strong> (<em>str</em>) – El desplazamiento (en words).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.get_register_value">
+<span class="sig-name descname"><span class="pre">get_register_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.get_register_value" title="Link to this definition"></a></dt>
+<dd><p>Obtiene el valor de un registro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>register</strong> (<em>str</em>) – El nombre del registro (ej. “t0”).</p>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si el registro especificado no es válido.</p>
+</dd>
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>El valor del registro.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.instruction_count">
 <span class="sig-name descname"><span class="pre">instruction_count</span></span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.instruction_count" title="Link to this definition"></a></dt>
@@ -123,6 +242,20 @@ de registros y memoria.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.jump">
+<span class="sig-name descname"><span class="pre">jump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.jump" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “j” (jump).</p>
+<p>Salta incondicionalmente a la dirección de la etiqueta especificada.
+De momento, por simplicidad, debe ser el número de línea que requiere
+el jump.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target</strong> (<em>str</em>) – La etiqueta de destino del salto.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.load_instructions">
 <span class="sig-name descname"><span class="pre">load_instructions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.load_instructions" title="Link to this definition"></a></dt>
 <dd><p>Lee las instrucciones ensamblador desde un archivo.</p>
@@ -137,10 +270,79 @@ de registros y memoria.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.lw">
+<span class="sig-name descname"><span class="pre">lw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.lw" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “lw” (load word).</p>
+<p>Carga una palabra desde la memoria a un registro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – La dirección de memoria en formato “offset(register)”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.memory">
 <span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.memory" title="Link to this definition"></a></dt>
 <dd><p>Lista que representa la memoria.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.nor_op">
+<span class="sig-name descname"><span class="pre">nor_op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.nor_op" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “nor” (not or).</p>
+<p>Realiza una operación OR bit a bit entre dos registros y
+luego invierte el resultado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src1</strong> (<em>str</em>) – El primer registro fuente.</p></li>
+<li><p><strong>src2</strong> (<em>str</em>) – El segundo registro fuente.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.or_op">
+<span class="sig-name descname"><span class="pre">or_op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.or_op" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “or”.</p>
+<p>Realiza una operación OR bit a bit entre dos registros y
+guarda el resultado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src1</strong> (<em>str</em>) – El primer registro fuente.</p></li>
+<li><p><strong>src2</strong> (<em>str</em>) – El segundo registro fuente.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.parse_memory_address">
+<span class="sig-name descname"><span class="pre">parse_memory_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.parse_memory_address" title="Link to this definition"></a></dt>
+<dd><p>Parsea un operando de acceso a memoria (ej. “offset(register)”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>operand</strong> (<em>str</em>) – El operando de acceso a memoria.</p>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si formato de operando de memoria es incorrecto.</p>
+</dd>
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Una tupla conteniendo el registro base y el offset.</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[str, int]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -155,6 +357,90 @@ de registros y memoria.</p>
 <dd><p>Ejecuta las instrucciones ensamblador cargadas.</p>
 <p>La ejecución continúa hasta que se procesan todas las instrucciones
 o se alcanza el máximo número de instrucciones permitido.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.set_register_value">
+<span class="sig-name descname"><span class="pre">set_register_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">register</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.set_register_value" title="Link to this definition"></a></dt>
+<dd><p>Establece el valor de un registro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>register</strong> (<em>str</em>) – El nombre del registro (ej. “t0”).</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – El valor a establecer en el registro.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Muestra<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Si el registro especificado no es válido.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.sll">
+<span class="sig-name descname"><span class="pre">sll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shamt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.sll" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “sll” (shift left logical).</p>
+<p>Desplaza los bits de un registro a la izquierda por una
+cantidad especificada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src</strong> (<em>str</em>) – El registro fuente.</p></li>
+<li><p><strong>shamt</strong> (<em>str</em>) – La cantidad de bits a desplazar (shift amount).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.slt">
+<span class="sig-name descname"><span class="pre">slt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.slt" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “slt” (set less than).</p>
+<p>Establece el registro de destino a 1 si el primer
+registro fuente es menor que el segundo, de lo contrario,
+lo establece a 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src1</strong> (<em>str</em>) – El primer registro fuente.</p></li>
+<li><p><strong>src2</strong> (<em>str</em>) – El segundo registro fuente.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.sub">
+<span class="sig-name descname"><span class="pre">sub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.sub" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “sub”.</p>
+<p>Resta el valor de un registro del valor de otro registro
+y guarda el resultado.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dest</strong> (<em>str</em>) – El registro de destino.</p></li>
+<li><p><strong>src1</strong> (<em>str</em>) – El registro del que se resta.</p></li>
+<li><p><strong>src2</strong> (<em>str</em>) – El registro a restar.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MIPSsimulator.MIPS_Emulator.sw">
+<span class="sig-name descname"><span class="pre">sw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MIPSsimulator.MIPS_Emulator.sw" title="Link to this definition"></a></dt>
+<dd><p>Implementa la instrucción “sw” (store word).</p>
+<p>Guarda el valor de un registro en la memoria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<em>str</em>) – El registro fuente.</p></li>
+<li><p><strong>address</strong> (<em>str</em>) – La dirección de memoria en formato “offset(register)”.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

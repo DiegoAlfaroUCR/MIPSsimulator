@@ -9,7 +9,7 @@ Este código fue generado con el uso de Gemini 2.0 Flash
 """
 
 #: Máximo número de instrucciones a ejecutar para evitar bucles infinitos.
-MAX_INSTRUCTIONS = 20
+MAX_INSTRUCTIONS = 40
 
 
 class MIPS_Emulator:
@@ -76,15 +76,32 @@ class MIPS_Emulator:
             opcode = parts[0]
 
             if opcode == 'add':
-                self._add(parts[1], parts[2], parts[3])
+                self.add(parts[1], parts[2], parts[3])
             elif opcode == 'sub':
-                self._sub(parts[1], parts[2], parts[3])
+                self.sub(parts[1], parts[2], parts[3])
             elif opcode == 'lw':
-                self._lw(parts[1], parts[2])
+                self.lw(parts[1], parts[2])
             elif opcode == 'sw':
-                self._sw(parts[1], parts[2])
+                self.sw(parts[1], parts[2])
             elif opcode == 'addi':
-                self._addi(parts[1], parts[2], parts[3])
+                self.addi(parts[1], parts[2], parts[3])
+            elif opcode == 'sll':
+                self.sll(parts[1], parts[2], parts[3])
+            elif opcode == 'and':
+                self.and_op(parts[1], parts[2], parts[3])
+            elif opcode == 'or':
+                self.or_op(parts[1], parts[2], parts[3])
+            elif opcode == 'nor':
+                self.nor_op(parts[1], parts[2], parts[3])
+            elif opcode == 'beq':
+                self.beq(parts[1], parts[2], parts[3])
+            elif opcode == 'bne':
+                self.bne(parts[1], parts[2], parts[3])
+            elif opcode == 'slt':
+                self.slt(parts[1], parts[2], parts[3])
+            elif opcode == 'j':
+                self.jump(parts[1])
+                continue  # No se incrementa contador después del j
 
             self.instruction_pointer += 1
             self.instruction_count += 1
@@ -94,7 +111,7 @@ class MIPS_Emulator:
                   " instrucciones. "
                   "La ejecución puede haber terminado prematuramente.")
 
-    def _get_register_value(self, register: str) -> int:
+    def get_register_value(self, register: str) -> int:
         """
         Obtiene el valor de un registro.
 
@@ -109,7 +126,7 @@ class MIPS_Emulator:
         else:
             raise ValueError(f"Registro inválido: {register}")
 
-    def _set_register_value(self, register: str, value: int):
+    def set_register_value(self, register: str, value: int):
         """
         Establece el valor de un registro.
 
@@ -127,7 +144,7 @@ class MIPS_Emulator:
         else:
             raise ValueError(f"Registro inválido: {register}")
 
-    def _parse_memory_address(self, operand: str) -> tuple[str, int]:
+    def parse_memory_address(self, operand: str) -> tuple[str, int]:
         """
         Parsea un operando de acceso a memoria (ej. 'offset(register)').
 
@@ -149,7 +166,7 @@ class MIPS_Emulator:
             raise ValueError(
                 f"Formato de operando de memoria inválido: {operand}")
 
-    def _add(self, dest: str, src1: str, src2: str):
+    def add(self, dest: str, src1: str, src2: str):
         """
         Implementa la instrucción 'add'.
 
@@ -165,11 +182,11 @@ class MIPS_Emulator:
         dest_reg = dest.lstrip('$').strip(',')
         src1_reg = src1.lstrip('$').strip(',')
         src2_reg = src2.lstrip('$').strip(',')
-        value1 = self._get_register_value(src1_reg)
-        value2 = self._get_register_value(src2_reg)
-        self._set_register_value(dest_reg, value1 + value2)
+        value1 = self.get_register_value(src1_reg)
+        value2 = self.get_register_value(src2_reg)
+        self.set_register_value(dest_reg, value1 + value2)
 
-    def _sub(self, dest: str, src1: str, src2: str):
+    def sub(self, dest: str, src1: str, src2: str):
         """
         Implementa la instrucción 'sub'.
 
@@ -186,11 +203,11 @@ class MIPS_Emulator:
         dest_reg = dest.lstrip('$').strip(',')
         src1_reg = src1.lstrip('$').strip(',')
         src2_reg = src2.lstrip('$').strip(',')
-        value1 = self._get_register_value(src1_reg)
-        value2 = self._get_register_value(src2_reg)
-        self._set_register_value(dest_reg, value1 - value2)
+        value1 = self.get_register_value(src1_reg)
+        value2 = self.get_register_value(src2_reg)
+        self.set_register_value(dest_reg, value1 - value2)
 
-    def _lw(self, dest: str, address: str):
+    def lw(self, dest: str, address: str):
         """
         Implementa la instrucción 'lw' (load word).
 
@@ -203,17 +220,17 @@ class MIPS_Emulator:
         """
         dest_reg = dest.lstrip('$').strip(',')
         base_reg_with_offset = address.strip(',')
-        base_reg, offset = self._parse_memory_address(base_reg_with_offset)
+        base_reg, offset = self.parse_memory_address(base_reg_with_offset)
         base_reg_stripped = base_reg.lstrip('$')
-        base_address = self._get_register_value(base_reg_stripped)
+        base_address = self.get_register_value(base_reg_stripped)
         memory_index = (base_address + offset) // 4
         if 0 <= memory_index < len(self.memory):
-            self._set_register_value(dest_reg, self.memory[memory_index])
+            self.set_register_value(dest_reg, self.memory[memory_index])
         else:
             print("Error: Intento de acceder a una dirección de"
                   f" memoria inválida: {base_address + offset}")
 
-    def _sw(self, src: str, address: str):
+    def sw(self, src: str, address: str):
         """
         Implementa la instrucción 'sw' (store word).
 
@@ -226,17 +243,17 @@ class MIPS_Emulator:
         """
         src_reg = src.lstrip('$').strip(',')
         base_reg_with_offset = address.strip(',')
-        base_reg, offset = self._parse_memory_address(base_reg_with_offset)
+        base_reg, offset = self.parse_memory_address(base_reg_with_offset)
         base_reg_stripped = base_reg.lstrip('$')
-        base_address = self._get_register_value(base_reg_stripped)
+        base_address = self.get_register_value(base_reg_stripped)
         memory_index = (base_address + offset) // 4
         if 0 <= memory_index < len(self.memory):
-            self.memory[memory_index] = self._get_register_value(src_reg)
+            self.memory[memory_index] = self.get_register_value(src_reg)
         else:
             print("Error: Intento de escribir en una dirección de memoria"
                   f" inválida: {base_address + offset}")
 
-    def _addi(self, dest: str, src: str, immediate: str):
+    def addi(self, dest: str, src: str, immediate: str):
         """
         Implementa la instrucción 'addi' (add immediate).
 
@@ -251,12 +268,194 @@ class MIPS_Emulator:
         """
         dest_reg = dest.lstrip('$').strip(',')
         src_reg = src.lstrip('$').strip(',')
-        value = self._get_register_value(src_reg)
+        value = self.get_register_value(src_reg)
         try:
             immediate_value = int(immediate.strip(','))
-            self._set_register_value(dest_reg, value + immediate_value)
+            self.set_register_value(dest_reg, value + immediate_value)
         except ValueError:
             print(f"Error: Valor inmediato inválido: {immediate}")
+
+    def sll(self, dest: str, src: str, shamt: str):
+        """
+        Implementa la instrucción 'sll' (shift left logical).
+
+        Desplaza los bits de un registro a la izquierda por una
+        cantidad especificada.
+
+        :param dest: El registro de destino.
+        :type dest: str
+        :param src: El registro fuente.
+        :type src: str
+        :param shamt: La cantidad de bits a desplazar (shift amount).
+        :type shamt: str
+        """
+        dest_reg = dest.lstrip('$').strip(',')
+        src_reg = src.lstrip('$').strip(',')
+        value = self.get_register_value(src_reg)
+        try:
+            shift_amount = int(shamt.strip(',')) & 0x1F
+            self.set_register_value(dest_reg, value << shift_amount)
+        except ValueError:
+            print(f"Error: Valor de desplazamiento inválido: {shamt}")
+
+    def and_op(self, dest: str, src1: str, src2: str):
+        """
+        Implementa la instrucción 'and'.
+
+        Realiza una operación AND bit a bit entre dos registros y
+        guarda el resultado.
+
+        :param dest: El registro de destino.
+        :type dest: str
+        :param src1: El primer registro fuente.
+        :type src1: str
+        :param src2: El segundo registro fuente.
+        :type src2: str
+        """
+        dest_reg = dest.lstrip('$').strip(',')
+        src1_reg = src1.lstrip('$').strip(',')
+        src2_reg = src2.lstrip('$').strip(',')
+        value1 = self.get_register_value(src1_reg)
+        value2 = self.get_register_value(src2_reg)
+        self.set_register_value(dest_reg, value1 & value2)
+
+    def or_op(self, dest: str, src1: str, src2: str):
+        """
+        Implementa la instrucción 'or'.
+
+        Realiza una operación OR bit a bit entre dos registros y
+        guarda el resultado.
+
+        :param dest: El registro de destino.
+        :type dest: str
+        :param src1: El primer registro fuente.
+        :type src1: str
+        :param src2: El segundo registro fuente.
+        :type src2: str
+        """
+        dest_reg = dest.lstrip('$').strip(',')
+        src1_reg = src1.lstrip('$').strip(',')
+        src2_reg = src2.lstrip('$').strip(',')
+        value1 = self.get_register_value(src1_reg)
+        value2 = self.get_register_value(src2_reg)
+        self.set_register_value(dest_reg, value1 | value2)
+
+    def nor_op(self, dest: str, src1: str, src2: str):
+        """
+        Implementa la instrucción 'nor' (not or).
+
+        Realiza una operación OR bit a bit entre dos registros y
+        luego invierte el resultado.
+
+        :param dest: El registro de destino.
+        :type dest: str
+        :param src1: El primer registro fuente.
+        :type src1: str
+        :param src2: El segundo registro fuente.
+        :type src2: str
+        """
+        dest_reg = dest.lstrip('$').strip(',')
+        src1_reg = src1.lstrip('$').strip(',')
+        src2_reg = src2.lstrip('$').strip(',')
+        value1 = self.get_register_value(src1_reg)
+        value2 = self.get_register_value(src2_reg)
+        self.set_register_value(dest_reg, ~(value1 | value2))
+
+    def beq(self, rs: str, rt: str, offset: str):
+        """
+        Implementa la instrucción 'beq' (branch if equal).
+
+        Si el valor de dos registros son iguales, salta a una
+        dirección calculada.
+
+        :param rs: El primer registro a comparar.
+        :type rs: str
+        :param rt: El segundo registro a comparar.
+        :type rt: str
+        :param offset: El desplazamiento (en words).
+        :type offset: str
+        """
+        rs_reg = rs.lstrip('$').strip(',')
+        rt_reg = rt.lstrip('$').strip(',')
+        value1 = self.get_register_value(rs_reg)
+        value2 = self.get_register_value(rt_reg)
+        if value1 == value2:
+            try:
+                branch_offset = int(offset.strip(','))
+                self.instruction_pointer += branch_offset
+            except ValueError:
+                print(f"Error: Offset de salto inválido: {offset}")
+
+    def bne(self, rs: str, rt: str, offset: str):
+        """
+        Implementa la instrucción 'bne' (branch if not equal).
+
+        Si el valor de dos registros no son iguales, salta a
+        una dirección calculada.
+
+        :param rs: El primer registro a comparar.
+        :type rs: str
+        :param rt: El segundo registro a comparar.
+        :type rt: str
+        :param offset: El desplazamiento (en words).
+        :type offset: str
+        """
+        rs_reg = rs.lstrip('$').strip(',')
+        rt_reg = rt.lstrip('$').strip(',')
+        value1 = self.get_register_value(rs_reg)
+        value2 = self.get_register_value(rt_reg)
+        if value1 != value2:
+            try:
+                branch_offset = int(offset.strip(','))
+                self.instruction_pointer += branch_offset
+            except ValueError:
+                print(f"Error: Offset de salto inválido: {offset}")
+
+    def slt(self, dest: str, src1: str, src2: str):
+        """
+        Implementa la instrucción 'slt' (set less than).
+
+        Establece el registro de destino a 1 si el primer
+        registro fuente es menor que el segundo, de lo contrario,
+        lo establece a 0.
+
+        :param dest: El registro de destino.
+        :type dest: str
+        :param src1: El primer registro fuente.
+        :type src1: str
+        :param src2: El segundo registro fuente.
+        :type src2: str
+        """
+        dest_reg = dest.lstrip('$').strip(',')
+        src1_reg = src1.lstrip('$').strip(',')
+        src2_reg = src2.lstrip('$').strip(',')
+        value1 = self.get_register_value(src1_reg)
+        value2 = self.get_register_value(src2_reg)
+        if value1 < value2:
+            self.set_register_value(dest_reg, 1)
+        else:
+            self.set_register_value(dest_reg, 0)
+
+    def jump(self, target: str):
+        """
+        Implementa la instrucción 'j' (jump).
+
+        Salta incondicionalmente a la dirección de la etiqueta especificada.
+        De momento, por simplicidad, debe ser el número de línea que requiere
+        el jump.
+
+        :param target: La etiqueta de destino del salto.
+        :type target: str
+        """
+        try:
+            target_index = int(target)
+            if 0 <= target_index < len(self.instructions):
+                self.instruction_pointer = target_index
+            else:
+                print(f"Error: Destino de salto inválido: {target_index}")
+        except ValueError:
+            print("Error: Destino de salto inválido"
+                  f" (no es un número): {target}")
 
 
 def main(filename: str):
